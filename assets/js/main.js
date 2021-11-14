@@ -10,7 +10,7 @@ $(() => {
     let createBtnTemplate = btn => {
         return `
             <div class="btn-wrapper col-` + btn.size + `">
-                <div class="btn` + (btn.class !== "" ? (" " + btn.class) : "") + `">` + btn.symbol + `</div>
+                <div class="btn` + (btn.class !== "" ? (" " + btn.class) : "") + `">` + btn.displayedSymbol + `</div>
             </div>
         `
     };
@@ -23,20 +23,21 @@ $(() => {
     let buttons = [{
         symbol: "(",
         displayedSymbol: "(",
-        size: 3,
+        size: 2,
         type: BtnType.InputBtn,
         class: "",
         getTemplate: function() { return createBtnTemplate(this) }
     }, {
         symbol: ")",
         displayedSymbol: ")",
-        size: 3,
+        size: 2,
         type: BtnType.InputBtn,
         class: "",
         getTemplate: function() { return createBtnTemplate(this) }
     }, {
         symbol: "C",
-        size: 3,
+        displayedSymbol: "C",
+        size: 2,
         type: BtnType.FuncBtn,
         class: "clr",
         getTemplate: function() { return createBtnTemplate(this) },
@@ -45,6 +46,16 @@ $(() => {
             evalValue = "0";
             initialState = true;
             updateDisplay();
+        }
+    }, {
+        symbol: "&#8592;",
+        displayedSymbol: "&#8592;",
+        size: 3,
+        type: BtnType.FuncBtn,
+        class: "back",
+        getTemplate: function() { return createBtnTemplate(this) },
+        func: function() {
+            console.log("Backspace");
         }
     }, {
         symbol: "/",
@@ -76,7 +87,7 @@ $(() => {
         getTemplate: function() { return createBtnTemplate(this) }
     }, {
         symbol: "*",
-        displayedSymbol: "x",
+        displayedSymbol: "&#10006;",
         size: 3,
         type: BtnType.InputBtn,
         class: "mul",
@@ -153,6 +164,7 @@ $(() => {
         getTemplate: function() { return createBtnTemplate(this) }
     }, {
         symbol: "=",
+        displayedSymbol: "=",
         size: 3,
         type: BtnType.FuncBtn,
         class: "eq",
