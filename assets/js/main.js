@@ -41,7 +41,7 @@ $(() => {
         type: BtnType.FuncBtn,
         class: "clr",
         getTemplate: function() { return createBtnTemplate(this) },
-        func: function() {
+        func: function(btn) {
             displayValue = "0";
             evalValue = "0";
             initialState = true;
@@ -54,7 +54,7 @@ $(() => {
         type: BtnType.FuncBtn,
         class: "back",
         getTemplate: function() { return createBtnTemplate(this) },
-        func: function() {
+        func: function(btn) {
             console.log("Backspace");
         }
     }, {
@@ -169,13 +169,15 @@ $(() => {
         type: BtnType.FuncBtn,
         class: "eq",
         getTemplate: function() { return createBtnTemplate(this) },
-        func: function() {
+        func: function(btn) {
             let newValue = "";
             try {
                 newValue = new String(eval(evalValue));
             } catch (ex) {
                 newValue = "NaN";
             }
+
+            if (newValue.toString() === "undefined") newValue = "NaN";
 
             if (displayValue !== newValue.toString()) initialState = true;
             displayValue = newValue;
@@ -218,7 +220,7 @@ $(() => {
                     }
                 case BtnType.FuncBtn:
                     {
-                        btnElement.on('click', e => btn.func());
+                        btnElement.on('click', e => btn.func(btnElement));
                         break;
                     }
             }
